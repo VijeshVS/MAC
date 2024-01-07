@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
@@ -18,7 +19,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -79,18 +82,16 @@ public class mainPage extends AppCompatActivity implements View.OnClickListener,
         databaseReference.child("ganga").child("sensors").child("temp").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                int n = 6;
-
+                long values = task.getResult().getChildrenCount();
+                int n = 1;
                 for(DataSnapshot snapshot: task.getResult().getChildren() ) {
-                    if(n==0)
-                        break;
-
-                    float x = Float.parseFloat(String.valueOf(snapshot.getKey()));
-                    float y = Float.parseFloat(String.valueOf(snapshot.getValue()));
-                    dataVals.add(new Entry(x,y));
-                    n--;
+                    if(values-6 < n) {
+                        float x = Float.parseFloat(String.valueOf(snapshot.getKey()));
+                        float y = Float.parseFloat(String.valueOf(snapshot.getValue()));
+                        dataVals.add(new Entry(x, y));
+                    }
+                    n++;
                 }
-
 
                 showChart(dataVals);
             }
@@ -99,16 +100,16 @@ public class mainPage extends AppCompatActivity implements View.OnClickListener,
         databaseReference.child("ganga").child("sensors").child("turb").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                int n = 6;
+                long values = task.getResult().getChildrenCount();
+                int n = 1;
 
                 for(DataSnapshot snapshot: task.getResult().getChildren() ) {
-                    if(n==0)
-                        break;
-
-                    float x = Float.parseFloat(String.valueOf(snapshot.getKey()));
-                    float y = Float.parseFloat(String.valueOf(snapshot.getValue()));
-                    turbdata.add(new Entry(x,y));
-                    n--;
+                    if(values-6 < n) {
+                        float x = Float.parseFloat(String.valueOf(snapshot.getKey()));
+                        float y = Float.parseFloat(String.valueOf(snapshot.getValue()));
+                        turbdata.add(new Entry(x, y));
+                    }
+                    n++;
                 }
 
                 showChart2(turbdata);
@@ -131,8 +132,15 @@ public class mainPage extends AppCompatActivity implements View.OnClickListener,
                                 if(n==1) {
                                     float x = Float.parseFloat(String.valueOf(snapshot.getKey()));
                                     float y = Float.parseFloat(String.valueOf(snapshot.getValue()));
-                                    dataVals.remove(0);
-                                    dataVals.add(new Entry(x, y));
+
+                                    int s = dataVals.size();
+                                    Entry temp = dataVals.get(s-1);
+
+                                    Entry e = new Entry(x,y);
+                                    if(temp.getX() != x && temp.getY() != y) {
+                                        dataVals.remove(0);
+                                        dataVals.add(e);
+                                    }
                                 }
                                 n--;
 
@@ -172,8 +180,15 @@ public class mainPage extends AppCompatActivity implements View.OnClickListener,
                                 if(n==1) {
                                     float x = Float.parseFloat(String.valueOf(snapshot.getKey()));
                                     float y = Float.parseFloat(String.valueOf(snapshot.getValue()));
-                                    turbdata.remove(0);
-                                    turbdata.add(new Entry(x, y));
+
+                                    int s = turbdata.size();
+                                    Entry temp = turbdata.get(s-1);
+
+                                    Entry e = new Entry(x,y);
+                                    if(temp.getX()!=x && temp.getY()!=y) {
+                                        turbdata.remove(0);
+                                        turbdata.add(e);
+                                    }
                                 }
                                 n--;
                             }
@@ -203,7 +218,7 @@ public class mainPage extends AppCompatActivity implements View.OnClickListener,
                     });
 
                     try {
-                        Thread.sleep(120000);
+                        Thread.sleep(60000);
                     } catch (InterruptedException e) {
                         Toast.makeText(mainPage.this, "Runtime Exception!! didn't sleep", Toast.LENGTH_SHORT).show();
                     }
@@ -231,18 +246,27 @@ public class mainPage extends AppCompatActivity implements View.OnClickListener,
 
     public void showChart(ArrayList<Entry> dataVals) {
         LineDataSet lineDataSet = new LineDataSet(dataVals,"Temperature");
+        lineDataSet.setColor(Color.RED);
         LineData lineData1 = new LineData(lineDataSet);
+        Description description = new Description();
+        description.setText(" ");
+        lineChart.setDescription(description);
         lineChart.clear();
         lineChart.setData(lineData1);
         lineChart.invalidate();
+        lineChart.animateX(3000,Easing.EaseInSine);
     }
 
     public void showChart2(ArrayList<Entry> turbdata){
         LineDataSet lineDataSet1 = new LineDataSet(turbdata,"Turbidity");
         LineData lineData2  = new LineData(lineDataSet1);
+        Description description = new Description();
+        description.setText(" ");
+        lineChart2.setDescription(description);
         lineChart2.clear();
         lineChart2.setData(lineData2);
         lineChart2.invalidate();
+        lineChart2.animateX(3000,Easing.EaseInSine);
     }
 
 
