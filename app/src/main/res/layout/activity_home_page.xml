@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ap="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5"
+    android:elevation="5dp"
+    tools:context=".mainPage"
+    android:id="@+id/drawerLayout_home"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:backgroundTint="#8F00FF"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                ap:titleMarginStart="4dp"
+                ap:titleTextColor="@color/black"
+                tools:ignore="MissingConstrains,MissingConstraints">
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+            <ProgressBar
+                android:id="@+id/progressBarID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ap:layout_constraintEnd_toEndOf="parent"
+                ap:layout_constraintStart_toStartOf="parent"
+                ap:layout_constraintTop_toTopOf="parent" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="670dp"
+                android:orientation="vertical"
+                ap:layout_constraintEnd_toEndOf="parent"
+                ap:layout_constraintStart_toStartOf="parent"
+                ap:layout_constraintTop_toBottomOf="@+id/toolbar_home">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mywatersourceList"
+                    android:layout_width="409dp"
+                    android:layout_height="729dp"
+                    android:layout_below="@id/welcomeMSG"
+                    android:layout_marginTop="7dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/welcomeMSG"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center_horizontal"
+                    android:text="Welcome"
+                    android:textColor="#E30909"
+                    android:textSize="24sp" />
+
+
+            </RelativeLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/navigationView_home"
+        ap:headerLayout="@layout/headerfile"
+        android:fitsSystemWindows="true"
+        ap:menu="@menu/sidemenu"
+        android:layout_gravity="start"/>
+
+
+    </androidx.drawerlayout.widget.DrawerLayout>
