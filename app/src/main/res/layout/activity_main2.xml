@@ -1,20 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login"
-    android:padding="20dp"
     android:background="#FFFFFF"
     >
 
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="150sp"
+        android:layout_marginTop="120sp"
+        android:layout_marginBottom="20sp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/authentication"
+        android:id="@+id/auth"
+       />
+
     <RelativeLayout
+        android:layout_below="@+id/auth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/relInput">
+        android:id="@+id/relInput"
+        android:paddingLeft="30px"
+        android:paddingRight="30px">
 
     <EditText
         android:id="@+id/edtTxt"
@@ -22,12 +38,14 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
-        android:hint="Enter your Email"
-        android:layout_below="@id/ologo"
-        android:background="@drawable/edit_text_border"
+        android:hint="Enter your email"
+        android:layout_below="@id/loginHead"
+        android:background="@drawable/enterfield_style"
         android:padding="10sp"
         android:textColorHint="@color/black"
         android:textColor="@color/black"
+        android:layout_marginTop="20sp"
+
         />
 
 
@@ -41,33 +59,37 @@
         android:ems="10"
         android:inputType="textPassword"
         android:layout_below="@id/edtTxt"
-        android:background="@drawable/edit_text_border"
+        android:background="@drawable/enterfield_style"
         android:padding="10sp"
         android:textColorHint="@color/black"
         android:textColor="@color/black"
         />
 
-    <Button
-        android:layout_width="200sp"
-        android:layout_height="55sp"
+    <android.widget.Button
+        android:layout_width="150sp"
+        android:layout_height="50sp"
         android:text="Login"
-        android:textSize="20sp"
+        android:textSize="17sp"
         android:id="@+id/logButt"
         android:layout_below="@id/edtPass"
         android:layout_marginTop="18sp"
-        android:layout_centerHorizontal="true"
-        android:backgroundTint="@android:color/holo_orange_light"
-        android:drawablePadding="20sp"
-        android:textColor="#000000"
 
+        android:layout_centerHorizontal="true"
+        android:drawablePadding="20sp"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/login_button_style"
         />
 
-    <ImageView
-        android:id="@+id/ologo"
+    <TextView
+        android:textStyle="bold"
+        android:id="@+id/loginHead"
+        android:text="Login"
+        android:textColor="#8E2DE2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/orangelogo"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:textSize="35sp"/>
 
     </RelativeLayout>
 
@@ -76,6 +98,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/relInput"
+        android:paddingLeft="30px"
         >
         <TextView
             android:id="@+id/newUser"
@@ -93,12 +116,30 @@
             android:layout_marginLeft="7dp"
             android:layout_toRightOf="@id/newUser"
             android:text="Register"
-            android:textColor="#4169E1"
+            android:textColor="#8E2DE2"
             android:textSize="18sp"
             />
 
     </RelativeLayout>
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ellip_design_2"
+        android:layout_marginLeft="-50sp"
+        android:layout_marginTop="-50sp"/>
 
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ellip_design_2"
+        android:layout_marginRight="-50sp"
+        android:layout_marginBottom="-140sp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/relInput"
+        android:rotation="28"/>
 
 </RelativeLayout>

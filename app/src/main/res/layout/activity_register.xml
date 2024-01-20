@@ -5,38 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Register"
-    android:padding="20sp"
     android:background="#FFFFFF">
 
     <RelativeLayout
+        android:id="@+id/regContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:paddingLeft="30px"
+        android:paddingRight="30px"
         >
 
         <TextView
+            android:textStyle="bold"
             android:id="@+id/registerHead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Register"
             android:layout_centerHorizontal="true"
             android:textSize="35sp"
-            android:textColor="#FFA500"
-            android:textFontWeight="1000"
+            android:textColor="#8E2DE2"
             android:layout_marginBottom="25sp"
-            android:layout_alignParentRight="true"
             />
 
 
         <EditText
             android:id="@+id/emailAdd"
             android:layout_width="match_parent"            android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_border"
+            android:background="@drawable/enterfield_style"
             android:padding="10sp"
-            android:hint="Email Address"
+            android:hint="Email address"
             android:layout_below="@+id/registerHead"
-            android:layout_marginTop="15sp"
+            android:layout_marginTop="8sp"
             android:textColorHint="@color/black"
             android:textColor="@color/black"
             />
@@ -44,7 +45,7 @@
         <EditText
             android:id="@+id/firstPass"
             android:layout_width="match_parent"            android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_border"
+            android:background="@drawable/enterfield_style"
             android:padding="10sp"
             android:hint="Password"
             android:inputType="textPassword"
@@ -58,7 +59,7 @@
             android:id="@+id/confPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_border"
+            android:background="@drawable/enterfield_style"
             android:padding="10sp"
             android:hint="Confirm Password"
             android:inputType="textPassword"
@@ -82,6 +83,7 @@
             android:layout_height="wrap_content"
             android:text="Already have a account? "
             android:layout_marginTop="20sp"
+            android:layout_marginLeft="10px"
             android:textSize="18sp"
             android:textColorHint="@color/black"
             android:textColor="@color/black"
@@ -94,13 +96,13 @@
             android:text="Login"
             android:layout_marginTop="20sp"
             android:layout_toRightOf="@id/loginLinkSide"
-            android:textColor="#4169E1"
+            android:textColor="#8E2DE2"
             android:textSize="18sp"
             />
 
         </RelativeLayout>
 
-        <Button
+        <android.widget.Button
             android:id="@+id/registerBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -108,13 +110,33 @@
             android:layout_below="@+id/accLay"
             android:layout_marginTop="20sp"
             android:layout_centerHorizontal="true"
-            android:textColor="@android:color/black"
-            android:backgroundTint="@android:color/holo_orange_light"
+            android:textColor="#FFFF"
             android:width="200sp"
-            android:textSize="20sp"
+            android:textSize="18sp"
+            android:background="@drawable/login_button_style"
             />
 
     </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ellip_design_2"
+        android:layout_marginLeft="-50sp"
+        android:layout_marginTop="-50sp"/>
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ellip_design_2"
+        android:layout_marginRight="-55sp"
+        android:layout_marginBottom="-80sp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/regContainer"
+        android:rotation="28"/>
 
 
 </RelativeLayout>
