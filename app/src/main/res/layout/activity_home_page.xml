@@ -16,18 +16,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar_home"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:backgroundTint="#8F00FF"
+                android:background="@drawable/toolbar_custom"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                ap:title=" "
                 ap:titleMarginStart="4dp"
                 ap:titleTextColor="@color/black"
                 tools:ignore="MissingConstrains,MissingConstraints">
@@ -43,12 +43,14 @@
                 ap:layout_constraintTop_toTopOf="parent" />
 
             <RelativeLayout
+                android:id="@+id/relativeLayout"
                 android:layout_width="match_parent"
                 android:layout_height="670dp"
                 android:orientation="vertical"
                 ap:layout_constraintEnd_toEndOf="parent"
                 ap:layout_constraintStart_toStartOf="parent"
                 ap:layout_constraintTop_toBottomOf="@+id/toolbar_home">
+
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/mywatersourceList"
@@ -66,14 +68,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="15dp"
                     android:gravity="center_horizontal"
                     android:text="Welcome"
-                    android:textColor="#E30909"
+                    android:textColor="#8E2DE2"
                     android:textSize="24sp" />
 
 
+
             </RelativeLayout>
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

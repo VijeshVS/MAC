@@ -33,6 +33,7 @@
         android:paddingRight="30px">
 
     <EditText
+        android:fontFamily="@font/roboto_font"
         android:id="@+id/edtTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -51,6 +52,7 @@
 
 
     <EditText
+        android:fontFamily="@font/roboto_font"
         android:layout_marginTop="10sp"
         android:id="@+id/edtPass"
         android:hint="Enter your password"
@@ -66,6 +68,7 @@
         />
 
     <android.widget.Button
+        android:fontFamily="@font/roboto_font"
         android:layout_width="150sp"
         android:layout_height="50sp"
         android:text="Login"
@@ -81,6 +84,7 @@
         />
 
     <TextView
+        android:fontFamily="@font/roboto_font"
         android:textStyle="bold"
         android:id="@+id/loginHead"
         android:text="Login"
@@ -101,6 +105,7 @@
         android:paddingLeft="30px"
         >
         <TextView
+            android:fontFamily="@font/roboto_font"
             android:id="@+id/newUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -110,6 +115,7 @@
             />
 
         <TextView
+            android:fontFamily="@font/roboto_font"
             android:id="@+id/registerLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

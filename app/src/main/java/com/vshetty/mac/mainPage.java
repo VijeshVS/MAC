@@ -64,7 +64,6 @@ public class mainPage extends AppCompatActivity implements View.OnClickListener,
     TextView tempval;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,12 +73,15 @@ public class mainPage extends AppCompatActivity implements View.OnClickListener,
         turbval = findViewById(R.id.turbval);
         tempval = findViewById(R.id.tempval);
 
+
+
+        String water_s = static_behaviour.water;
         lineChart = findViewById(R.id.lineChart);
         lineChart2 = findViewById(R.id.lineChart2);
 
         databaseReference = FirebaseDatabase.getInstance("https://realtimewqms-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("water_sources");
 
-        databaseReference.child("ganga").child("sensors").child("temp").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        databaseReference.child(water_s).child("sensors").child("temp").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 long values = task.getResult().getChildrenCount();
@@ -97,7 +99,7 @@ public class mainPage extends AppCompatActivity implements View.OnClickListener,
             }
         });
 
-        databaseReference.child("ganga").child("sensors").child("turb").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        databaseReference.child(water_s).child("sensors").child("turb").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 long values = task.getResult().getChildrenCount();
@@ -123,7 +125,7 @@ public class mainPage extends AppCompatActivity implements View.OnClickListener,
             public void run() {
                 while(true){
                     // chart update
-                    databaseReference.child("ganga").child("sensors").child("temp").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    databaseReference.child(water_s).child("sensors").child("temp").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DataSnapshot> task) {
                             long n = task.getResult().getChildrenCount();
@@ -149,7 +151,7 @@ public class mainPage extends AppCompatActivity implements View.OnClickListener,
                         }
                     });
 
-                    databaseReference.child("ganga").child("sensors").child("temp").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    databaseReference.child(water_s).child("sensors").child("temp").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DataSnapshot> task) {
                             long n = task.getResult().getChildrenCount();
@@ -171,7 +173,7 @@ public class mainPage extends AppCompatActivity implements View.OnClickListener,
                     });
 
 
-                    databaseReference.child("ganga").child("sensors").child("turb").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    databaseReference.child(water_s).child("sensors").child("turb").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DataSnapshot> task) {
                             long n = task.getResult().getChildrenCount();
@@ -196,7 +198,7 @@ public class mainPage extends AppCompatActivity implements View.OnClickListener,
                         }
                     });
 
-                    databaseReference.child("ganga").child("sensors").child("turb").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    databaseReference.child(water_s).child("sensors").child("turb").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DataSnapshot> task) {
                             long n = task.getResult().getChildrenCount();
@@ -207,6 +209,7 @@ public class mainPage extends AppCompatActivity implements View.OnClickListener,
                                         @Override
                                         public void run() {
                                             String f = String.valueOf(y);
+
                                             turbval.setText(f + " NTU");
                                         }
                                     });

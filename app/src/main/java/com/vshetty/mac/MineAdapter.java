@@ -68,6 +68,7 @@ public class MineAdapter extends RecyclerView.Adapter<MineAdapter.MyViewHolder> 
                     }
                     else{
                         // start new activity that is monitoring
+                        static_behaviour.water = waterSource.getName();
                         Intent intent = new Intent(context, mainPage.class);
                         context.startActivity(intent);
                     }

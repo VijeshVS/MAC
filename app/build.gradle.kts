@@ -5,6 +5,7 @@ plugins {
     id("com.google.gms.google-services")
 }
 
+
 android {
     namespace = "com.vshetty.mac"
     compileSdk = 34
@@ -31,6 +32,13 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    sourceSets {
+        getByName("main") {
+            assets {
+                srcDirs("src/main/assets")
+            }
+        }
+    }
 }
 
 
@@ -50,6 +58,7 @@ dependencies {
     implementation ("de.hdodenhof:circleimageview:3.1.0")
     implementation ("com.google.android.material:material:1.2.1")
 
-
+    implementation(platform("com.google.firebase:firebase-bom:32.7.1"))
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
 
 }

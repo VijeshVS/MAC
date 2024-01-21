@@ -11,8 +11,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/backgroundLayout"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:background="@drawable/bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +23,7 @@
         android:id="@+id/orangeLogo"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/orangelogo"
+        android:src="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

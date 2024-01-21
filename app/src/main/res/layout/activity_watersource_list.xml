@@ -25,8 +25,9 @@ tools:openDrawer="start">
             android:id="@+id/toolbar_home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:backgroundTint="#8F00FF"
+           
+            android:background="@drawable/toolbar_custom"
+            ap:title=" "
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             ap:layout_constraintEnd_toEndOf="parent"
             ap:titleMarginStart="4dp"
@@ -67,10 +68,10 @@ tools:openDrawer="start">
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="15dp"
                 android:gravity="center_horizontal"
                 android:text="List of water sources "
-                android:textColor="#E30909"
+                android:textColor="#8E2DE2"
                 android:textSize="24sp" />
 
 

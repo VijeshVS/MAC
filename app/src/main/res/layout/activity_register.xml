@@ -23,6 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Register"
+            android:fontFamily="@font/roboto_font"
             android:layout_centerHorizontal="true"
             android:textSize="35sp"
             android:textColor="#8E2DE2"
@@ -31,6 +32,7 @@
 
 
         <EditText
+            android:fontFamily="@font/roboto_font"
             android:id="@+id/emailAdd"
             android:layout_width="match_parent"            android:layout_height="wrap_content"
             android:background="@drawable/enterfield_style"
@@ -43,6 +45,7 @@
             />
 
         <EditText
+            android:fontFamily="@font/roboto_font"
             android:id="@+id/firstPass"
             android:layout_width="match_parent"            android:layout_height="wrap_content"
             android:background="@drawable/enterfield_style"
@@ -56,6 +59,7 @@
             />
 
         <EditText
+            android:fontFamily="@font/roboto_font"
             android:id="@+id/confPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -78,6 +82,7 @@
            >
 
         <TextView
+            android:fontFamily="@font/roboto_font"
             android:id="@+id/loginLinkSide"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -90,6 +95,7 @@
             />
 
         <TextView
+            android:fontFamily="@font/roboto_font"
             android:id="@+id/loginLink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -103,6 +109,7 @@
         </RelativeLayout>
 
         <android.widget.Button
+            android:fontFamily="@font/roboto_font"
             android:id="@+id/registerBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -117,6 +124,15 @@
             />
 
     </RelativeLayout>
+
+    <ImageView
+        android:layout_width="400px"
+        android:layout_height="400px"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20sp"
+        android:src="@drawable/reg"
+
+        />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -137,6 +153,8 @@
         android:layout_alignParentBottom="true"
         android:layout_below="@id/regContainer"
         android:rotation="28"/>
+
+
 
 
 </RelativeLayout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize other theme attributes as needed -->
+        <item name="android:fontFamily">@font/roboto_font</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+    </style>
+
+    <style name="AppTheme.MenuTextStyle">
+        <item name="android:textColor">#000000</item> <!-- Change text color to black -->
+        <item name="android:padding">10dp</item> <!-- Add padding to the text -->
+        <!-- Add more styling attributes as needed -->
+    </style>
+
+</resources>
