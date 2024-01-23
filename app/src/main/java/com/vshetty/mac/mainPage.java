@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -51,6 +52,8 @@ public class mainPage extends AppCompatActivity implements View.OnClickListener,
     public ArrayList<Entry> dataVals = new ArrayList<Entry>();
     public ArrayList<Entry> turbdata = new ArrayList<Entry>();
 
+    TextView quality_teller;
+
     Button dataBtn ;
     DatabaseReference databaseReference;
 
@@ -72,6 +75,7 @@ public class mainPage extends AppCompatActivity implements View.OnClickListener,
 
         turbval = findViewById(R.id.turbval);
         tempval = findViewById(R.id.tempval);
+        quality_teller = findViewById(R.id.textView4);
 
 
 
@@ -84,17 +88,32 @@ public class mainPage extends AppCompatActivity implements View.OnClickListener,
         databaseReference.child(water_s).child("sensors").child("temp").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
+                ArrayList<Float> set_of_values = new ArrayList<>();
+
                 long values = task.getResult().getChildrenCount();
                 int n = 1;
                 for(DataSnapshot snapshot: task.getResult().getChildren() ) {
-                    if(values-6 < n) {
+                    if(values-10 < n) {
                         float x = Float.parseFloat(String.valueOf(snapshot.getKey()));
                         float y = Float.parseFloat(String.valueOf(snapshot.getValue()));
                         dataVals.add(new Entry(x, y));
+                        set_of_values.add(y);
                     }
                     n++;
                 }
 
+                float mean = 0;
+                float sum = 0;
+
+                for(int i = 0;i<10;i++){
+                    sum+=set_of_values.get(i);
+                }
+
+                mean = sum/10;
+                float ref_val = 682.53f;
+                float percentage_of_dev = ((Math.abs(mean-ref_val))/ref_val) * 100;
+                static_behaviour.temp = percentage_of_dev;
+                Log.d("temp", "onComplete: "+percentage_of_dev);
                 showChart(dataVals);
             }
         });
@@ -102,16 +121,46 @@ public class mainPage extends AppCompatActivity implements View.OnClickListener,
         databaseReference.child(water_s).child("sensors").child("turb").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
+                ArrayList<Float> set_of_values = new ArrayList<>();
                 long values = task.getResult().getChildrenCount();
                 int n = 1;
 
                 for(DataSnapshot snapshot: task.getResult().getChildren() ) {
-                    if(values-6 < n) {
+                    if(values-10 < n) {
                         float x = Float.parseFloat(String.valueOf(snapshot.getKey()));
                         float y = Float.parseFloat(String.valueOf(snapshot.getValue()));
                         turbdata.add(new Entry(x, y));
+                        set_of_values.add(y);
                     }
                     n++;
+                }
+
+                float mean = 0;
+                float sum = 0;
+
+                for(int i = 0;i<10;i++){
+                    sum+=set_of_values.get(i);
+                }
+
+                mean = sum/10;
+                float ref_val = 28.5f;
+                float percentage_of_dev = ((Math.abs(mean-ref_val))/ref_val) * 100;
+                static_behaviour.turb = percentage_of_dev;
+                Log.d("turb", "onComplete: "+percentage_of_dev);
+                if(static_behaviour.temp >=25 && static_behaviour.turb >=25){
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            quality_teller.setText("Quality of water is bad");
+                        }
+                    });
+                } else{
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            quality_teller.setText("Quality of water is Good");
+                        }
+                    });
                 }
 
                 showChart2(turbdata);
@@ -139,9 +188,10 @@ public class mainPage extends AppCompatActivity implements View.OnClickListener,
                                     Entry temp = dataVals.get(s-1);
 
                                     Entry e = new Entry(x,y);
-                                    if(temp.getX() != x && temp.getY() != y) {
+                                    dataVals.add(e);
+
+                                    if(dataVals.size() > 10 && temp.getX()!=x ) {
                                         dataVals.remove(0);
-                                        dataVals.add(e);
                                     }
                                 }
                                 n--;
@@ -184,12 +234,14 @@ public class mainPage extends AppCompatActivity implements View.OnClickListener,
                                     float y = Float.parseFloat(String.valueOf(snapshot.getValue()));
 
                                     int s = turbdata.size();
+                                    // last value
                                     Entry temp = turbdata.get(s-1);
 
                                     Entry e = new Entry(x,y);
-                                    if(temp.getX()!=x && temp.getY()!=y) {
+                                    turbdata.add(e);
+
+                                    if(turbdata.size() > 10 && temp.getX()!=x) {
                                         turbdata.remove(0);
-                                        turbdata.add(e);
                                     }
                                 }
                                 n--;
@@ -217,6 +269,91 @@ public class mainPage extends AppCompatActivity implements View.OnClickListener,
                                 n--;
 
                             }
+                        }
+                    });
+
+                    databaseReference.child(water_s).child("sensors").child("temp").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DataSnapshot> task) {
+                            ArrayList<Float> set_of_values = new ArrayList<>();
+
+                            long values = task.getResult().getChildrenCount();
+                            int n = 1;
+                            for(DataSnapshot snapshot: task.getResult().getChildren() ) {
+                                if(values-10 < n) {
+                                    float x = Float.parseFloat(String.valueOf(snapshot.getKey()));
+                                    float y = Float.parseFloat(String.valueOf(snapshot.getValue()));
+
+                                    set_of_values.add(y);
+                                }
+                                n++;
+                            }
+
+                            float mean = 0;
+                            float sum = 0;
+
+                            for(int i = 0;i<10;i++){
+                                sum+=set_of_values.get(i);
+                            }
+
+                            mean = sum/10;
+                            float ref_val = 28.5f;
+                            float percentage_of_dev = ((Math.abs(mean-ref_val))/ref_val) * 100;
+
+                            static_behaviour.temp = percentage_of_dev;
+
+                        }
+                    });
+
+                    databaseReference.child(water_s).child("sensors").child("turb").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DataSnapshot> task) {
+                            ArrayList<Float> set_of_values = new ArrayList<>();
+                            long values = task.getResult().getChildrenCount();
+                            int n = 1;
+
+                            for(DataSnapshot snapshot: task.getResult().getChildren() ) {
+                                if(values-10 < n) {
+                                    float x = Float.parseFloat(String.valueOf(snapshot.getKey()));
+                                    float y = Float.parseFloat(String.valueOf(snapshot.getValue()));
+
+                                    set_of_values.add(y);
+                                }
+                                n++;
+                            }
+
+                            float mean = 0;
+                            float sum = 0;
+
+                            for(int i = 0;i<10;i++){
+                                sum+=set_of_values.get(i);
+                            }
+
+
+                            mean = sum/10;
+
+                            float ref_val = 682.54f;
+                            float percentage_of_dev = ((Math.abs(mean-ref_val))/ref_val) * 100;
+
+                            static_behaviour.turb = percentage_of_dev;
+
+
+                            if(static_behaviour.temp >=25 || static_behaviour.turb >=25){
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        quality_teller.setText("Quality of water is bad");
+                                    }
+                                });
+                            } else{
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        quality_teller.setText("Quality of water is Good");
+                                    }
+                                });
+                            }
+
                         }
                     });
 
