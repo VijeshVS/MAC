@@ -3,6 +3,7 @@
 
 Android based application designed to monitor the quality of water in realtime.
 
+<p align="center"><img src="https://socialify.git.ci/VijeshVS/MAC/image?language=1&amp;owner=1&amp;name=1&amp;stargazers=1&amp;theme=Light" alt="project-image"></p>
 
 ## Features
 
